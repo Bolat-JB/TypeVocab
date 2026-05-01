@@ -1,71 +1,68 @@
-"# TypeVocab - Kazakh Vocabulary Typing Practice
+# ⌨️ TypeVocab - Kazakh Vocabulary Typing Practice
 
-A modern web application for learning Kazakh vocabulary through typing practice. Built with Next.js and Tailwind CSS.
+A modern, open-source web application designed to help users learn Kazakh vocabulary through gamified typing practice. Built with Next.js and Tailwind CSS.
 
-## Features
+## 🎯 Project Concept & DPG Logic
 
-- **Minimal Clean UI**: Centered layout with modern rounded design
-- **Dark Mode Friendly**: Optimized for dark theme
-- **Responsive Design**: Works on all screen sizes
-- **Real-time Feedback**: Visual cues for correct/incorrect answers
-- **Progress Tracking**: Score, accuracy percentage, and streak counter
-- **No Backend Required**: All data stored locally
+### Problem Definition
+Learning Kazakh vocabulary often relies on rote memorization, which can be tedious and difficult to retain. There is a lack of engaging, muscle-memory-based digital tools for rapid vocabulary acquisition in Kazakhstan.
 
-## Vocabulary Categories
+### Value Proposition & Target Users
+**Target Users:** Students, expatriates, and anyone looking to improve their Kazakh vocabulary quickly.
+**Value Proposition:** "Learn Kazakh through muscle memory. Fast, free, and accessible."
 
-- **Greetings**: сәлем, рақмет, жақсы, etc.
-- **School**: кітап, мектеп, оқушы, etc.
-- **City**: қала, көше, транспорт, etc.
-- **Food**: баз, сұз, май, etc.
-- **Nature**: тұздық, су, күн, etc.
-- **Animals**: мысық, қой, балық, etc.
+### SDG Alignment (Sustainable Development Goals)
+*   **SDG 4 (Quality Education):** Providing free, accessible, and interactive educational tools for language learning.
+*   **SDG 11 (Sustainable Cities and Communities):** Promoting the preservation and daily usage of the local language and culture.
 
-## How to Use
+### DPG Justification (Digital Public Goods)
+TypeVocab adheres to DPG standards by being:
+1. **Open Source:** Licensed under MIT, allowing anyone to modify or host the project.
+2. **Open Data:** The vocabulary lists are stored in open JSON/JS formats.
+3. **Do No Harm:** The app stores no personal user data, strictly protecting user privacy.
 
-1. The app displays a random Kazakh word
-2. Type the word in the input field
-3. Press Enter or click \"Check Answer\"
-4. If correct: input clears, next word appears, score increases
-5. Track your progress with score and accuracy metrics
+### Market and Competitor Analysis (SWOT)
+*   **Strengths:** Completely free, open-source, lightweight, no login required.
+*   **Weaknesses:** Currently web-only (no dedicated mobile app).
+*   **Opportunities:** High potential for viral marketing on TikTok/Instagram ("Learn Kazakh fast" shorts).
+*   **Threats:** Major platforms like Duolingo eventually adding Kazakh to their courses.
 
-## Tech Stack
+---
 
-- **Next.js 14**: React framework
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first styling
-- **React Hooks**: State management (useState, useEffect)
+## 🛠️ Tech Stack & Architecture
+*   **Frontend:** Next.js 14, React Hooks
+*   **Styling:** Tailwind CSS (Custom Dark Theme)
+*   **Deployment:** Node.js environment
 
-## Project Structure
+---
 
-\`\`\`
-typevocab/
-├── app/
-│   ├── globals.css       # Global styles
-│   ├── layout.tsx        # Root layout
-│   └── page.tsx          # Main application
-├── src/
-│   └── data/
-│       └── words.js      # Vocabulary storage
-├── tailwind.config.ts    # Tailwind configuration
-├── tsconfig.json         # TypeScript configuration
-└── package.json          # Dependencies
-\`\`\`
+## 🤝 Open Source Practices & How to Contribute
 
-## Installation
+We welcome contributions from students and developers! We specifically maintain a beginner-friendly repository.
 
-\`\`\`bash
-npm install
-npm run dev
-\`\`\`
+**How to contribute:**
+1. Read our full contribution guidelines in [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+2. Fork the repository.
+3. Add new words to the `src/data/words.js` file.
+4. Submit a Pull Request!
 
-## Available Scripts
+*Note: This repository uses Dependabot to ensure all dependencies are kept up to date and secure.*
 
-- \`npm run dev\`: Start development server
-- \`npm run build\`: Build for production
-- \`npm run start\`: Start production server
-- \`npm run lint\`: Run ESLint
+---
 
-## License
+## 👥 Team Members & Roles
 
-MIT
-"
+*   **Bolat:** Project Lead, DevOps, Open Source Architecture (Licenses, Dependabot), Documentation.
+*   **Ilia:** Product Manager, UI/UX Design, React Prototype Implementation, Content Strategy.
+
+---
+
+## 🤖 AI Usage Disclosure
+In accordance with course policies, AI tools were utilized in the following ways:
+*   **Claude / Gemini:** Used to assist in structuring the initial React component boilerplate (`page.tsx`) and generating the Markdown templates for the `README.md` and `CONTRIBUTING.md` to ensure rubric compliance.
+*   **Tailwind Generation:** AI was used to help map custom dark mode colors to Tailwind configuration classes.
+
+---
+
+## 📄 License
+This project is licensed under the [MIT License](./LICENSE).
