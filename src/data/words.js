@@ -1,4 +1,3 @@
-// Kazakh vocabulary grouped by categories
 export const words = {
   greetings: [
     'сәлем',
@@ -28,50 +27,48 @@ export const words = {
     'автобус',
     'бақша',
     'жұмыс',
-    'кеңсе', // Changed from 'офис' to native 'кеңсе'
+    'кеңсе',
   ],
   food: [
-    'нан',   // Bread
-    'тұз',   // Salt
+    'нан',
+    'тұз',
     'қант',
     'сүт',
     'айран',
     'қымыз',
-    'май',   // Butter/Oil
+    'май',
     'ет',
     'тәтті',
     'ас',
   ],
   nature: [
-    'дала',  // Steppe
+    'дала',
     'жер',
     'су',
     'күн',
     'ай',
-    'бұлт',  // Cloud
+    'бұлт',
     'жаңбыр',
-    'орман', // Forest
+    'орман',
     'ағаш',
     'гүл',
   ],
   animals: [
     'мысық',
-    'ит',    // Fixed spelling
+    'ит',
     'қой',
     'жылқы',
     'балық',
     'құс',
     'қасқыр',
-    'үйрек', // Fixed spelling
+    'үйрек',
     'құрт',
-    'бақа',  // Frog
+    'бақа',
   ],
 };
 
-// Get all words as a flat array
 export const allWords = Object.values(words).flat();
 
-// Get a random word from all categories
 export const getRandomWord = () => {
   const flatWords = Object.values(words).flat();
   return flatWords[Math.floor(Math.random() * flatWords.length)];
