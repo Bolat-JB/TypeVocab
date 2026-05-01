@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-// Safer relative import
 import { getRandomWord } from '../src/data/words'
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
   const [isCorrect, setIsCorrect] = useState(false)
   const [isWrong, setIsWrong] = useState(false)
   
-  // Added reference to keep the input focused automatically
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -40,7 +38,6 @@ export default function Home() {
 
     setAttempts(attempts + 1)
 
-    // Made it case-insensitive just in case
     if (userInput.trim().toLowerCase() === currentWord.toLowerCase()) {
       setScore(score + 1)
       setCorrectStreak(correctStreak + 1)
@@ -51,7 +48,6 @@ export default function Home() {
       setTimeout(() => {
         setCurrentWord(getRandomWord())
         setIsCorrect(false)
-        // Automatically refocus the input for the next word
         inputRef.current?.focus()
       }, 500)
     } else {
@@ -64,7 +60,6 @@ export default function Home() {
   const accuracy = attempts > 0 ? Math.round((score / attempts) * 100) : 0
 
   return (
-    // Fixed Tailwind class: bg-bg instead of bg-bg-DEFAULT
     <div className="min-h-screen bg-bg flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         
