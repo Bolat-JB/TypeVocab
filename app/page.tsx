@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { getRandomWord } from '../src/data/words'
+import { words, allWords } from '../src/data/words'
 
 export default function Home() {
   const [currentWord, setCurrentWord] = useState('')
@@ -12,16 +12,28 @@ export default function Home() {
   const [isCorrect, setIsCorrect] = useState(false)
   const [isWrong, setIsWrong] = useState(false)
   
+  // NEW: Category State
+  const [selectedCategory, setSelectedCategory] = useState('all')
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // NEW: Function to get a word based on the selected category
+  const pickNewWord = (category: string) => {
+    const wordList = category === 'all' ? allWords : words[category as keyof typeof words]
+    const randomWord = wordList[Math.floor(Math.random() * wordList.length)]
+    setCurrentWord(randomWord)
+  }
+
+  // Pick a word when the app loads OR when the category changes
   useEffect(() => {
-    setCurrentWord(getRandomWord())
-  }, [])
+    pickNewWord(selectedCategory)
+    setUserInput('')
+    setIsCorrect(false)
+    setIsWrong(false)
+  }, [selectedCategory])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setUserInput(value)
-
     if (isCorrect) setIsCorrect(false)
     if (isWrong) setIsWrong(false)
   }
@@ -46,7 +58,7 @@ export default function Home() {
       setUserInput('')
 
       setTimeout(() => {
-        setCurrentWord(getRandomWord())
+        pickNewWord(selectedCategory)
         setIsCorrect(false)
         inputRef.current?.focus()
       }, 500)
@@ -57,41 +69,68 @@ export default function Home() {
     }
   }
 
+  // NEW: Skip function
+  const skipWord = () => {
+    setCorrectStreak(0) // Reset streak on skip
+    pickNewWord(selectedCategory)
+    setUserInput('')
+    setIsWrong(false)
+    inputRef.current?.focus()
+  }
+
   const accuracy = attempts > 0 ? Math.round((score / attempts) * 100) : 0
+  const categories = ['all', 'greetings', 'school', 'city', 'food', 'nature', 'animals']
 
   return (
-    <div className="min-h-screen bg-bg flex items-center justify-center p-4">
+    <div className="min-h-screen bg-bg flex items-center justify-center p-4 font-sans">
       <div className="w-full max-w-2xl">
         
-        {/* Header with score and accuracy */}
-        <div className="flex justify-between items-center mb-8 px-4 gap-4">
+        {/* Header Stats */}
+        <div className="flex justify-between items-center mb-6 px-4 gap-4">
           <div className="flex-1 bg-bg-card rounded-2xl px-6 py-4 shadow-lg border border-gray-800 text-center">
-            <div className="text-sm text-fg-muted">Score</div>
+            <div className="text-sm text-fg-muted uppercase tracking-wider mb-1">Score</div>
             <div className="text-3xl font-bold text-accent">{score}</div>
           </div>
           <div className="flex-1 bg-bg-card rounded-2xl px-6 py-4 shadow-lg border border-gray-800 text-center">
-            <div className="text-sm text-fg-muted">Accuracy</div>
+            <div className="text-sm text-fg-muted uppercase tracking-wider mb-1">Accuracy</div>
             <div className="text-3xl font-bold" style={{ color: accuracy >= 70 ? '#10b981' : accuracy >= 50 ? '#f59e0b' : '#ef4444' }}>
               {accuracy}%
             </div>
           </div>
           <div className="flex-1 bg-bg-card rounded-2xl px-6 py-4 shadow-lg border border-gray-800 text-center">
-            <div className="text-sm text-fg-muted">Streak</div>
+            <div className="text-sm text-fg-muted uppercase tracking-wider mb-1">Streak</div>
             <div className="text-3xl font-bold text-accent">{correctStreak}</div>
           </div>
         </div>
 
-        {/* Main card */}
+        {/* NEW: Category Selector */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-all duration-300 border
+                ${selectedCategory === cat 
+                  ? 'bg-accent border-accent text-white shadow-lg shadow-green-500/20' 
+                  : 'bg-bg-card border-gray-700 text-fg-muted hover:border-gray-500 hover:text-fg'}`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Main interactive card */}
         <div className="bg-bg-card rounded-3xl p-8 shadow-2xl border border-gray-800">
           
-          {/* Word display */}
           <div className="text-center mb-8">
-            <h1 className="text-6xl md:text-7xl font-bold text-fg tracking-tight break-all" style={{ fontFamily: 'Noto Sans, system-ui, sans-serif' }}>
+            <p className="text-fg-muted text-sm uppercase tracking-wider mb-3">
+              Translate to Kazakh
+            </p>
+            <h1 className="text-5xl md:text-6xl font-bold text-fg tracking-tight break-all">
               {currentWord}
             </h1>
           </div>
 
-          {/* Input field */}
           <div className="relative mb-4">
             <input
               ref={inputRef}
@@ -99,49 +138,38 @@ export default function Home() {
               value={userInput}
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              placeholder="Type the word above..."
-              className={`w-full bg-bg border-2 rounded-2xl px-6 py-5 text-xl text-fg placeholder-fg-muted focus:outline-none transition-all duration-300 
-                ${isCorrect ? 'border-accent bg-green-900/30' : ''}
-                ${isWrong ? 'border-danger bg-red-900/30' : ''}
-                ${!isCorrect && !isWrong ? 'border-gray-700 hover:border-gray-600 focus:border-accent' : ''}
+              placeholder="Type your answer here..."
+              className={`w-full bg-bg border-2 rounded-2xl px-6 py-5 text-xl text-center text-fg placeholder-gray-600 focus:outline-none transition-all duration-300 
+                ${isCorrect ? 'border-accent bg-green-900/20' : ''}
+                ${isWrong ? 'border-danger bg-red-900/20' : ''}
+                ${!isCorrect && !isWrong ? 'border-gray-700 hover:border-gray-600 focus:border-accent focus:bg-gray-900' : ''}
               `}
               autoFocus
             />
-            {isCorrect && (
-              <span className="absolute right-6 top-1/2 -translate-y-1/2 text-2xl text-accent">✓</span>
-            )}
-            {isWrong && (
-              <span className="absolute right-6 top-1/2 -translate-y-1/2 text-2xl text-accent">⟳</span>
-            )}
           </div>
 
-          {/* Status message */}
-          <div className="text-center h-8">
-            {isCorrect && (
-              <span className="text-accent text-lg font-medium">
-                ✓ Correct!
-              </span>
-            )}
-            {isWrong && (
-              <span className="text-danger text-lg font-medium">
-                Try again. Check your spelling!
-              </span>
-            )}
+          <div className="text-center h-8 mb-4">
+            {isCorrect && <span className="text-accent text-lg font-medium">✓ Perfect!</span>}
+            {isWrong && <span className="text-danger text-lg font-medium">Not quite. Try again!</span>}
           </div>
 
-          {/* Action button */}
-          <button
-            onClick={checkAnswer}
-            className="w-full mt-4 bg-accent hover:bg-accent-hover text-white font-semibold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Check Answer
-          </button>
+          {/* Action buttons */}
+          <div className="flex gap-4">
+            <button
+              onClick={skipWord}
+              className="flex-1 bg-gray-800 hover:bg-gray-700 text-fg font-medium py-4 px-8 rounded-2xl text-lg transition-all duration-300"
+            >
+              Skip Word
+            </button>
+            <button
+              onClick={checkAnswer}
+              className="flex-1 bg-accent hover:bg-accent-hover text-white font-semibold py-4 px-8 rounded-2xl text-lg transition-all duration-300 shadow-lg shadow-green-500/20"
+            >
+              Check Answer
+            </button>
+          </div>
         </div>
 
-        {/* Progress info */}
-        <div className="text-center mt-6 text-fg-muted text-sm">
-          Press Enter or click the button to check your answer
-        </div>
       </div>
     </div>
   )
