@@ -62,7 +62,3 @@ In accordance with course policies, AI tools were utilized in the following ways
 *   **Claude / Gemini:** Used to assist in structuring the initial React component boilerplate (`page.tsx`) and generating the Markdown templates for the `README.md` and `CONTRIBUTING.md` to ensure rubric compliance.
 *   **Tailwind Generation:** AI was used to help map custom dark mode colors to Tailwind configuration classes.
 
----
-
-## 📄 License
-This project is licensed under the [MIT License](./LICENSE).
