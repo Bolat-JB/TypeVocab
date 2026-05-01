@@ -17,7 +17,7 @@ Learning Kazakh vocabulary often relies on rote memorization, which can be tedio
 
 ### DPG Justification (Digital Public Goods)
 TypeVocab adheres to DPG standards by being:
-1. **Open Source:** Licensed under MIT, allowing anyone to modify or host the project.
+1. **Open Source:** Licensed under Apache 2.0, allowing anyone to modify or host the project.
 2. **Open Data:** The vocabulary lists are stored in open JSON/JS formats.
 3. **Do No Harm:** The app stores no personal user data, strictly protecting user privacy.
 
@@ -52,8 +52,8 @@ We welcome contributions from students and developers! We specifically maintain 
 
 ## 👥 Team Members & Roles
 
-*   **Bolat:** Project Lead, DevOps, Open Source Architecture (Licenses, Dependabot), Documentation.
-*   **Ilia:** Product Manager, UI/UX Design, React Prototype Implementation, Content Strategy.
+*   **Bolat:** Documentation Lead (managed repo docs, guidelines, and report).
+*   **Ilia:** Lead Developer (built the Next.js prototype and game logic).
 
 ---
 
@@ -65,4 +65,4 @@ In accordance with course policies, AI tools were utilized in the following ways
 ---
 
 ## 📄 License
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the [Apache 2.0 License](./LICENSE).
